@@ -1,0 +1,276 @@
+
+:root {
+    --ink: #203247;
+    --muted: #64778d;
+    --border: #d8e2ec;
+    --blue: #2564a5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3f7fb;
+    color: var(--ink);
+    font: 15px/1.5 system-ui, "Segoe UI", sans-serif;
+}
+
+.shell {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.heading {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 30px;
+}
+
+.eyebrow {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+h1 {
+    margin: 5px 0;
+    font-size: 36px;
+    letter-spacing: -1px;
+}
+
+h1 span {
+    font-weight: 400;
+    color: #8294a7;
+}
+
+.heading > p:last-child {
+    margin: 8px 0 0;
+    color: var(--muted);
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 17px 0;
+}
+
+button, .upload {
+    appearance: none;
+    display: inline-block;
+    padding: 10px 13px;
+    color: #294663;
+    background: white;
+    border: 1px solid #cbd9e7;
+    border-radius: 9px;
+    font: 600 13px/1.5 system-ui, sans-serif;
+    cursor: pointer;
+}
+
+button:hover, .upload:hover {
+    background: #eaf3fc;
+    border-color: #8badd2;
+}
+
+.primary {
+    color: white;
+    background: var(--blue);
+    border-color: var(--blue);
+}
+
+.primary:hover {
+    color: white;
+    background: #184e87;
+}
+
+.upload input {
+    display: none;
+}
+
+.viewer {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 15px 20px;
+}
+
+#nodeCount {
+    color: var(--blue);
+    font-size: 13px;
+}
+
+.hint {
+    margin-left: auto;
+    font-size: 12px;
+    color: #8394a5;
+}
+
+.canvas {
+    height: 540px;
+    background-color: #f8fbfe;
+    background-image: radial-gradient(#dce6f1 0.9px, transparent 0.9px);
+    background-size: 22px 22px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    cursor: grab;
+}
+
+.canvas:active {
+    cursor: grabbing;
+}
+
+svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+.edge {
+    fill: none;
+    stroke: #a8bed1;
+    stroke-width: 2.2;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node rect {
+    fill: white;
+    stroke: #b9cbdc;
+    stroke-width: 1.6;
+}
+
+.node.program rect,
+.node.if rect,
+.node.while rect,
+.node.return rect {
+    fill: #e1ecff;
+    stroke: #81a6d6;
+}
+
+.node.binary rect,
+.node.unary rect {
+    fill: #e4f6ec;
+    stroke: #87c7a3;
+}
+
+.node:hover rect {
+    stroke: #175ca1;
+    stroke-width: 2.7;
+}
+
+.node.selected rect {
+    stroke: #0b64bf;
+    stroke-width: 3.2;
+}
+
+.node-label, .node-kind {
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.node-label {
+    fill: #243b55;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.node-kind {
+    fill: #70859b;
+    font-size: 11px;
+}
+
+.toggle {
+    cursor: pointer;
+}
+
+.toggle circle {
+    fill: #2a65a2;
+    stroke: white;
+    stroke-width: 2;
+}
+
+.toggle text {
+    fill: white;
+    font-size: 17px;
+    font-weight: 700;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.information {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 16px 22px;
+}
+
+.small-label {
+    margin: 0 0 3px;
+    font-size: 11px;
+    letter-spacing: 0.9px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+#detailsType {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.legend {
+    color: var(--muted);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #8ba4c1;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.program-dot { background: #e1ecff; }
+.operation-dot { background: #e4f6ec; }
+.other-dot { background: #fff; }
+
+.status, footer {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer {
+    padding-top: 5px;
+}
+
+@media (max-width: 850px) {
+    .shell { padding: 12px; }
+    .heading { padding: 20px; }
+    h1 { font-size: 29px; }
+    .hint { display: none; }
+    .canvas { height: 480px; }
+}

@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniC — AST Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="shell">
+        <header class="heading">
+            <p class="eyebrow">СИСТЕМНЕ ПРОГРАМУВАННЯ · ЛАБОРАТОРНА №3</p>
+            <h1>MiniC <span>— AST Viewer</span></h1>
+            <p>
+                Інтерактивна візуалізація абстрактного синтаксичного
+                дерева, створеного за допомогою Flex і Bison.
+            </p>
+        </header>
+
+        <section class="toolbar" aria-label="Керування деревом">
+            <button id="exampleButton" class="primary" type="button">
+                Завантажити demo AST
+            </button>
+            <label class="upload">
+                Обрати інший JSON
+                <input id="fileInput" type="file"
+                       accept=".json,application/json">
+            </label>
+            <button id="zoomInButton" type="button">Масштаб +</button>
+            <button id="zoomOutButton" type="button">Масштаб −</button>
+            <button id="fitButton" type="button">Вмістити</button>
+            <button id="expandButton" type="button">Розгорнути все</button>
+            <button id="overviewButton" type="button">Огляд</button>
+        </section>
+
+        <main class="viewer">
+            <div class="panel-heading">
+                <strong id="filename">AST ще не завантажено</strong>
+                <span id="nodeCount"></span>
+                <span class="hint">
+                    Прокручування — масштаб · Перетягування фону — переміщення
+                </span>
+            </div>
+
+            <div id="canvas" class="canvas">
+                <svg id="graph"
+                     xmlns="http://www.w3.org/2000/svg"
+                     role="img"
+                     aria-label="Графічне дерево AST">
+                    <g id="scene"></g>
+                </svg>
+            </div>
+
+            <div class="information">
+                <div>
+                    <p class="small-label">ВИБРАНИЙ ВУЗОЛ</p>
+                    <strong id="detailsLabel">Натисни на вузол дерева</strong>
+                    <p id="detailsType">
+                        Значок +/− розгортає та згортає гілку.
+                    </p>
+                </div>
+                <div class="legend">
+                    <span class="dot program-dot"></span> Програма / керування
+                    <span class="dot operation-dot"></span> Операції
+                    <span class="dot other-dot"></span> Інші вузли
+                </div>
+            </div>
+        </main>
+
+        <p id="status" class="status" role="status">
+            Завантаження дерева…
+        </p>
+        <footer>
+            Відображення реалізовано на JavaScript і SVG
+            без сторонніх графічних бібліотек.
+        </footer>
+    </div>
+</body>
+</html>
