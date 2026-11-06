@@ -302,9 +302,16 @@ static void execute(const Ast *node, Runtime *rt)
     }
 }
 
-int run_program(const Ast *root)
+
+int run_program(const Ast *root, int *exit_code)
 {
+    if (root == NULL || exit_code == NULL) {
+        return 1;
+    }
+
     Runtime rt = {0};
+
+    *exit_code = 0;
 
     execute(root, &rt);
 
@@ -314,5 +321,11 @@ int run_program(const Ast *root)
         rt.vars = next;
     }
 
-    return rt.error ? 1 : 0;
+    if (rt.error) {
+        return 1;
+    }
+
+    *exit_code = (int)(unsigned char)rt.return_value;
+
+    return 0;
 }

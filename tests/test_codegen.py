@@ -12,7 +12,8 @@ MINIC = ROOT / "build" / "minic"
 
 class CodeGenerationTests(unittest.TestCase):
 
-    def compare_programs(self, source, expected_output=None, expected_error=None):
+    def compare_programs(self, source, expected_output=None,
+                         expected_error=None, expected_exit_code=None):
         with tempfile.TemporaryDirectory() as directory:
             source_file = Path(directory) / "input.c"
             python_file = Path(directory) / "output.py"
@@ -50,8 +51,12 @@ class CodeGenerationTests(unittest.TestCase):
             self.assertEqual(original.returncode, translated.returncode)
             self.assertEqual(original.stdout, translated.stdout)
 
+            if expected_exit_code is not None:
+                self.assertEqual(original.returncode, expected_exit_code)
+
             if expected_output is not None:
-                self.assertEqual(original.returncode, 0, original.stderr)
+                if expected_exit_code is None:
+                    self.assertEqual(original.returncode, 0, original.stderr)
                 self.assertEqual(original.stdout, expected_output)
 
             if expected_error is not None:
@@ -149,6 +154,17 @@ class CodeGenerationTests(unittest.TestCase):
                 return 0;
             }
         """, expected_error="integer overflow")
+
+    def test_return_exit_code(self):
+        self.compare_programs("""
+            int main() {
+                if (1) {
+                    return 7;
+                }
+
+                return 0;
+            }
+        """, expected_output="", expected_exit_code=7)
 
 
 if __name__ == "__main__":

@@ -147,6 +147,18 @@ class MiniCTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("Unexpected character", result.stderr)
 
+    
+    def test_return_exit_code(self):
+        result = run_source("""
+            int main() {
+                return 7;
+            }
+        """)
+
+        self.assertEqual(result.returncode, 7)
+        self.assertEqual(result.stdout, "")
+        self.assertEqual(result.stderr, "")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

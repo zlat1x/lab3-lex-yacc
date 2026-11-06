@@ -90,10 +90,16 @@ int main(int argc, char *argv[])
             printf("Generated AST JSON: %s\n", argv[3]);
         }
     } else {
-        status = run_program(parsed_program);
+        int program_exit_code = 0;
+
+        if (run_program(parsed_program, &program_exit_code) != 0) {
+            status = EXIT_FAILURE;
+        } else {
+            status = program_exit_code;
+        }
     }
 
     ast_free(parsed_program);
 
-    return status == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+    return status;
 }

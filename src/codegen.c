@@ -277,7 +277,7 @@ int generate_python(FILE *output, const Ast *root)
     fputs(
         "\nif __name__ == '__main__':\n"
         "    try:\n"
-        "        main()\n"
+        "        sys.exit(main())\n"
         "    except RuntimeError as error:\n"
         "        print('Runtime error:', error, file=sys.stderr)\n"
         "        sys.exit(1)\n",
